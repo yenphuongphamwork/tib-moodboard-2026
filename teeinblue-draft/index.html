@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Teeinblue — prototype (Premotio layout)</title>
+<title>Teeinblue homepage draft</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Cormorant+Garamond:wght@600&display=swap">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@500;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  /* every pixel value below is measured on premotio.com at a 1440x813 viewport; --u scales it */
+  /* 1440x813 frame; --u scales it */
   :root{--u:min(calc(100vw / 1440),calc(100vh / 813));--ink:#091040;--body:#3B437A;--blue:#1350DE;--bg:#F6F9FF;--dark:#15171f}
   *{box-sizing:border-box}
   html{background:var(--bg)}
@@ -26,11 +26,17 @@
   .pillbtn{display:inline-flex;align-items:center;height:calc(var(--u)*36);padding:0 calc(var(--u)*16);border-radius:999px;background:var(--ink);color:#fff;font:700 calc(var(--u)*14)/1 Lato,sans-serif}
   .pillbtn.o{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(9,16,64,.3)}
 
-  .nav{position:fixed;z-index:60;top:20px;left:50%;transform:translateX(-50%);width:min(1312px,calc(100vw - 32px));height:56px;border-radius:16px;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:space-between;padding:0 10px 0 18px}
-  .nav img{height:26px;width:auto;display:block}
-  .nav nav{position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:26px}
-  .nav nav a{font:700 15px/1 Lato,sans-serif;color:var(--ink)}
-  .nav .btn{background:var(--ink);color:#fff;font:700 15px/1 Lato,sans-serif;padding:13px 16px;border-radius:10px}
+  .nav{position:fixed;z-index:60;top:0;left:0;right:0;height:72px;background:#02277C;display:flex;align-items:center;gap:24px;padding:0 max(16px,2.2vw)}
+  .nav img{height:34px;width:auto;display:block}
+  .nav nav{margin-left:auto;display:flex;align-items:center;gap:24px}
+  .nav nav a{font:700 16px/1 Lato,sans-serif;color:#fff;white-space:nowrap}
+  .nav .cs{margin-left:12px}
+  .dd{position:relative;padding:26px 0}
+  .dd i{display:inline-block;width:6px;height:6px;border:solid #fff;border-width:0 1.5px 1.5px 0;transform:rotate(45deg) translate(-2px,-2px);margin-left:7px}
+  .dd>div{position:absolute;top:64px;left:-18px;min-width:210px;background:#fff;border-radius:12px;box-shadow:0 18px 50px rgba(9,16,64,.2);padding:14px 18px;display:none;flex-direction:column;gap:14px}
+  .dd:hover>div,.dd:focus-within>div{display:flex}
+  .nav .dd>div a{color:var(--ink);font-size:15px}.dd>div b{font:700 12px/1 Lato,sans-serif;color:#7a82b3;margin-top:4px}
+  .nav .btn{background:#FFDF8F;color:#091040;font:700 16px/1 Lato,sans-serif;padding:18px 20px;border-radius:10px;white-space:nowrap}
 
   .story{position:relative}
   .stage{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--bg)}
@@ -82,49 +88,60 @@
   @media (max-width:820px){.pm-card{grid-template-columns:1fr;grid-template-rows:38% 62%}.pm-title{font-size:32px}}
 
   /* list */
-  .list{left:calc(var(--u)*94);top:calc(var(--u)*120)}
+  #features,#steps,#live,#mcp{left:max(0px,calc((100% - var(--u)*1440)/2))}
+  .list{left:calc(var(--u)*64);top:calc(var(--u)*225)}
+  .list.D{font-size:calc(var(--u)*80)}
   .li{position:relative;height:calc(var(--u)*100);white-space:nowrap;opacity:.3;transition:opacity .3s,padding-left .3s;padding-left:0}
-  .li.on{padding-left:calc(var(--u)*111);opacity:1}
+  .li.on{padding-left:calc(var(--u)*92);opacity:1}
   .li.on::before{content:"→";position:absolute;left:0;top:0;font:inherit}
-  .prev{right:0;top:0;width:calc(var(--u)*564);height:100%;overflow:hidden}
+  .prev{left:calc(var(--u)*668);top:calc(var(--u)*125);width:calc(var(--u)*708);height:calc(var(--u)*600);overflow:hidden;border-radius:calc(var(--u)*20);box-shadow:0 20px 60px rgba(9,16,64,.16)}
   .prev .pc{position:absolute;inset:0;opacity:0;transition:opacity .45s}
   .prev .pc.on{opacity:1}
   .prev img{width:100%;height:100%;object-fit:cover;display:block}
   .prev .ph{width:100%;height:100%;background:#E0E8F9;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--body);font:italic 400 calc(var(--u)*15)/1.4 Lato,sans-serif;padding:calc(var(--u)*30)}
 
   /* steps */
-  .sframe{left:calc(var(--u)*64);top:calc(var(--u)*100);width:calc(var(--u)*756);height:calc(var(--u)*660);border-radius:calc(var(--u)*14);background:#1c1c1c;overflow:hidden}
-  .sframe{pointer-events:auto}
-  .sp{position:absolute;inset:0;opacity:0;transition:opacity .5s}
-  .sp.on{opacity:1}
-  .sed img{position:absolute;left:50%;top:50%;width:92%;transform:translate(-50%,-50%);border-radius:calc(var(--u)*6);display:block}
-  .spcard{position:absolute;left:8%;right:8%;top:50%;transform:translateY(-50%);background:#fff;border-radius:calc(var(--u)*14);padding:calc(var(--u)*30);box-shadow:0 calc(var(--u)*20) calc(var(--u)*50) rgba(0,0,0,.35)}
-  .sph{font:700 calc(var(--u)*17)/1.2 Lato,sans-serif;color:var(--ink);margin-bottom:calc(var(--u)*20)}
-  .spg{display:grid;grid-template-columns:repeat(3,1fr);gap:calc(var(--u)*12)}
-  .spl{height:calc(var(--u)*86);border:1px solid #DCE3F5;border-radius:calc(var(--u)*10);display:flex;align-items:center;justify-content:center;background:#fff}
-  .spl img{width:70%;height:55%;object-fit:contain;display:block}
-  .sp.on .spl{animation:spIn .5s both;animation-delay:calc(var(--k)*.08s)}
-  .sp.on .spl.sel{animation:spIn .5s both,spSel .45s 1.5s both;animation-delay:calc(var(--k)*.08s),1.5s}
-  .spf{display:flex;justify-content:space-between;align-items:center;margin-top:calc(var(--u)*22);font:400 calc(var(--u)*15)/1 Lato,sans-serif;color:var(--body)}
-  .spf b{font:700 calc(var(--u)*15)/1 Lato,sans-serif;background:var(--blue);color:#fff;padding:calc(var(--u)*11) calc(var(--u)*22);border-radius:999px;opacity:.35;transition:opacity .4s 1.7s}
-  .sp.on .spf b{opacity:1}
+  .s-h{left:calc(var(--u)*140);right:calc(var(--u)*0);width:calc(var(--u)*1160);top:calc(var(--u)*128);text-align:center;font:500 calc(var(--u)*56)/1.05 Dosis,sans-serif;color:var(--ink);margin:0}
+  .s-cards{left:calc(var(--u)*150);top:calc(var(--u)*240);width:calc(var(--u)*600);height:calc(var(--u)*500);pointer-events:auto}
+  .sp{position:absolute;inset:0;pointer-events:none}
+  .sc{position:absolute;width:calc(var(--u)*290);height:calc(var(--u)*400);border-radius:calc(var(--u)*18);overflow:hidden;background:#fff;box-shadow:0 calc(var(--u)*18) calc(var(--u)*50) rgba(9,16,64,.16);opacity:0;transform:translateY(calc(var(--u)*46)) scale(.97);transition:opacity .35s,transform .7s cubic-bezier(.16,1,.3,1)}
+  .sc.a{left:0;top:0}.sc.b{left:calc(var(--u)*310);top:calc(var(--u)*90)}
+  .sp.on .sc{opacity:1;transform:none;transition:opacity .5s .12s,transform .9s .12s cubic-bezier(.16,1,.3,1)}
+  .sp.on .sc.b{transition-delay:.28s}
+  .sc>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .sc.form>img{object-fit:contain;object-position:top}
+  .sc em{position:absolute;left:calc(var(--u)*14);bottom:calc(var(--u)*14);background:#fff;border-radius:999px;padding:calc(var(--u)*10) calc(var(--u)*16);font:700 max(11px,calc(var(--u)*15))/1 Lato,sans-serif;color:var(--ink);box-shadow:0 4px 18px rgba(9,16,64,.18)}
+  .sc.logos{display:flex;flex-direction:column;gap:calc(var(--u)*12);padding:calc(var(--u)*24);box-sizing:border-box}
+  .sc.logos span{font:700 max(11px,calc(var(--u)*16))/1 Lato,sans-serif;color:var(--ink);margin-bottom:calc(var(--u)*4)}
+  .sc.logos img{position:static;width:100%;height:auto;flex:1;min-height:0;object-fit:contain;border:1px solid #DCE3F5;border-radius:calc(var(--u)*10);padding:calc(var(--u)*12) calc(var(--u)*36);box-sizing:border-box}
+  .sp.on .logos img{animation:spIn .5s both;animation-delay:calc(.35s + var(--k)*.12s)}
   @keyframes spIn{from{opacity:0;transform:translateY(calc(var(--u)*10))}to{opacity:1;transform:none}}
-  @keyframes spSel{to{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue)}}
-  .spm{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-  .spchip{position:absolute;left:calc(var(--u)*28);top:calc(var(--u)*28);display:flex;align-items:center;gap:calc(var(--u)*12);background:#fff;border-radius:999px;padding:calc(var(--u)*12) calc(var(--u)*22) calc(var(--u)*12) calc(var(--u)*14);font:700 calc(var(--u)*16)/1 Lato,sans-serif;color:var(--ink);box-shadow:0 calc(var(--u)*8) calc(var(--u)*24) rgba(0,0,0,.3);opacity:0;transform:translateY(calc(var(--u)*12))}
-  .spchip img{height:calc(var(--u)*24);width:auto;display:block}
-  .sp.on .spchip{animation:spIn .5s .9s both}
-  .sright{left:calc(var(--u)*891);top:calc(var(--u)*130);width:calc(var(--u)*320);pointer-events:auto}
-  .st{height:calc(var(--u)*200);opacity:.35;transition:opacity .35s;cursor:pointer}
-  .st.on{opacity:1}
-  .st .bar{display:block;height:2px;width:100%;margin-top:calc(var(--u)*16);background:var(--blue);transform:scaleX(0);transform-origin:left}
-  .st.on .bar{animation:stBar 5.5s linear forwards}
+  .sright{left:calc(var(--u)*810);top:calc(var(--u)*268);width:calc(var(--u)*480);pointer-events:auto}
+  .st{position:relative;display:flex;gap:calc(var(--u)*26);padding:calc(var(--u)*20) 0;border-bottom:1px solid #CBD3EA;cursor:pointer}
+  .st>span{font:700 max(11px,calc(var(--u)*15))/calc(var(--u)*40) Lato,sans-serif;color:var(--blue)}
+  .st h3{margin:0;font:500 calc(var(--u)*38)/calc(var(--u)*40) Dosis,sans-serif;color:var(--ink);opacity:.38;transition:opacity .3s}
+  .st.on h3{opacity:1}
+  .st p{margin:0;display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.16,1,.3,1)}
+  .st.on p{grid-template-rows:1fr}
+  .st q{quotes:none;overflow:hidden;min-height:0;font:400 max(13px,calc(var(--u)*17))/1.4 Lato,sans-serif;color:var(--body)}
+  .st.on q{padding-top:calc(var(--u)*8)}
+  .st .bar{position:absolute;left:0;bottom:-1px;width:100%;height:2px;background:var(--blue);transform:scaleX(0);transform-origin:left}
+  .st.on .bar{animation:stBar 4.5s linear forwards}
+  @keyframes stBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  .s-cta{display:inline-block;margin-top:calc(var(--u)*30);background:var(--blue);color:#fff;border-radius:999px;padding:calc(var(--u)*16) calc(var(--u)*28);font:700 max(13px,calc(var(--u)*16))/1 Lato,sans-serif}
   /* try-it forms */
   .li{cursor:pointer;pointer-events:auto}
-  .prev .pc{display:flex;flex-direction:column;background:#fff}
+  .prev .pc{display:flex;background:#fff}
   .prev .pc.on{pointer-events:auto}
-  .prev .pc canvas{flex:1;min-height:0;width:100%;object-fit:cover;display:block}
-  .try{padding:calc(var(--u)*22) calc(var(--u)*30) calc(var(--u)*26)}
+  .prev .pc canvas{flex:1 1 0;width:0;min-width:0;min-height:0;height:100%;object-fit:cover;display:block}
+  .try{flex:0 0 calc(var(--u)*262);box-sizing:border-box;padding:calc(var(--u)*26) calc(var(--u)*24);display:flex;flex-direction:column;gap:calc(var(--u)*16)}
+  .try h4{margin:0;font:700 max(13px,calc(var(--u)*18))/1 Lato,sans-serif;color:var(--ink);padding-bottom:calc(var(--u)*14);border-bottom:1px solid #DCE3F5}
+  .try .opts{flex-wrap:wrap}.try .opts button{width:calc(var(--u)*62);height:calc(var(--u)*62)}
+  .try .pcta{margin-top:auto}
+  .try .up{border:1px dashed #9FB0DC;border-radius:calc(var(--u)*8);padding:calc(var(--u)*14);text-align:center;cursor:pointer;font:700 max(12px,calc(var(--u)*14))/1.2 Lato,sans-serif;color:var(--blue);margin:0}
+  .try .up input{display:none}
+  .try small{font:400 max(11px,calc(var(--u)*12))/1.35 Lato,sans-serif;color:var(--body)}
+  .fonts button{width:auto!important;height:auto!important;padding:calc(var(--u)*8) calc(var(--u)*12);min-height:34px!important}
   .try label,.pform label{display:block;font:700 max(12px,calc(var(--u)*14))/1.2 Lato,sans-serif;color:var(--ink);margin-bottom:calc(var(--u)*8)}
   .try input,.pform input{box-sizing:border-box;width:100%;border:1px solid #CBD3EA;border-radius:calc(var(--u)*8);padding:0 calc(var(--u)*12);height:max(34px,calc(var(--u)*44));font:400 max(14px,calc(var(--u)*16)) Lato,sans-serif;color:var(--ink);background:#fff}
   .try input:focus,.pform input:focus{outline:2px solid var(--blue);outline-offset:-1px}
@@ -133,13 +150,10 @@
   .opts button.on{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue)}
   .opts button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
   #steps.hold .st.on .bar{animation:none;transform:scaleX(1)}
-  @keyframes stBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
   .pill{display:inline-block;height:calc(var(--u)*25);line-height:calc(var(--u)*23);padding:0 calc(var(--u)*12);border-radius:999px;border:1px solid rgba(9,16,64,.45);font:700 calc(var(--u)*13)/calc(var(--u)*23) Lato,sans-serif;color:var(--ink)}
-  .st h3{font:500 calc(var(--u)*36)/calc(var(--u)*36) Dosis,sans-serif;margin-top:calc(var(--u)*20);color:var(--ink)}
-  .st p{margin-top:calc(var(--u)*12)}
 
   /* design studio (full bleed) */
-  #studio{background:var(--dark)}
+  #studio{background:var(--dark);display:none}
   .stu-h{left:calc(var(--u)*61);top:calc(var(--u)*60);color:#fff}
   .stu-img{left:calc(var(--u)*330);top:calc(var(--u)*190);width:calc(var(--u)*1040);border-radius:calc(var(--u)*12);box-shadow:0 30px 90px rgba(0,0,0,.5);display:block}
   .pills{left:calc(var(--u)*64);bottom:calc(var(--u)*40);height:calc(var(--u)*56);padding:calc(var(--u)*6);border-radius:999px;background:rgba(255,255,255,.92);display:flex;gap:calc(var(--u)*2)}
@@ -224,29 +238,29 @@
     .hero-l{top:calc(var(--u)*160)}.hero-r{top:calc(var(--u)*470);text-align:left;right:auto;left:calc(var(--u)*64)}
     .hero-p1{top:calc(var(--u)*700);left:calc(var(--u)*64);width:calc(var(--u)*420)}.hero-p2{top:calc(var(--u)*820);left:calc(var(--u)*64)}
     .li{height:calc(var(--u)*100)}
-    .prev{top:auto;bottom:0;left:0;right:0;width:auto;height:46%}
-    .list{top:calc(var(--u)*100)}
-    .sframe{left:calc(var(--u)*30);width:calc(var(--u)*640);top:calc(var(--u)*115);height:calc(var(--u)*430)}.spl{height:calc(var(--u)*66)}.spcard{padding:calc(var(--u)*24)}
-    .sright{left:calc(var(--u)*64);top:calc(var(--u)*580);width:calc(var(--u)*570)}
-    .st{height:auto;padding-bottom:calc(var(--u)*26)}.st h3{margin-top:calc(var(--u)*8)}.st p{display:none}.st.on p{display:block}.st .bar{margin-top:calc(var(--u)*12)}
+    .prev{top:calc(var(--u)*560);left:calc(var(--u)*30);width:calc(var(--u)*640);height:calc(var(--u)*820)}.prev .pc{flex-direction:column}.prev .pc canvas{width:100%;height:0}.try{flex:0 0 auto}
+    .list{top:calc(var(--u)*140)}.list.D{font-size:calc(var(--u)*86)}
+    .s-h{left:calc(var(--u)*30);width:calc(var(--u)*640);top:calc(var(--u)*150);font-size:calc(var(--u)*56)}
+    .s-cards{left:calc(var(--u)*50);top:calc(var(--u)*310)}
+    .sright{left:calc(var(--u)*50);top:calc(var(--u)*850);width:calc(var(--u)*600)}
     .stu-img{left:calc(var(--u)*30);top:calc(var(--u)*300);width:calc(var(--u)*640)}
     .phone{left:calc(var(--u)*30);top:calc(var(--u)*350);width:calc(var(--u)*340);height:calc(var(--u)*650)}
     .recv{left:calc(var(--u)*390);top:calc(var(--u)*500);width:calc(var(--u)*290)}
     .ph-p{left:calc(var(--u)*64);top:calc(var(--u)*1080);width:calc(var(--u)*560)}
-    .mcp-h{top:calc(var(--u)*150)}
+    .mcp-h{top:calc(var(--u)*150);font-size:calc(var(--u)*80)}
     .cap1{display:none}
     .lib-t{left:calc(var(--u)*30);top:calc(var(--u)*300);white-space:normal;width:calc(var(--u)*640)}
     .flow-cap{top:calc(var(--u)*900)}
-    .nav nav{display:none}
+    .nav nav{display:none}.nav .btn{margin-left:auto;padding:13px 14px;font-size:14px}
     footer .col{display:none}
   }
 </style>
 </head>
 <body>
 <header class="nav">
-  <a href="#"><img src="assets/tib-black-logo-tm.svg" alt="Teeinblue"></a>
-  <nav><a href="#">Features</a><a href="#">How it works</a><a href="#">Design Studio</a><a href="#">MCP</a><a href="#">Free design library</a></nav>
-  <a class="btn" href="#">Start free trial</a>
+  <a href="#"><img src="assets/tib-white-logo-tm.svg" alt="Teeinblue"></a>
+  <nav><a href="#">Features</a><div class="dd"><a href="#">Pricing <i></i></a><div><a href="#">For Shopify</a><a href="#">For Etsy</a><a href="#">For Others</a></div></div><div class="dd"><a href="#">Integrations <i></i></a><div><b>Platform</b><a href="#">Shopify</a><a href="#">Etsy</a><a href="#">Boundless</a><b>Partners</b><a href="#">POD Providers</a><a href="#">App Partners</a><a href="#">Hire an Expert</a><a href="#">Become a Partner</a></div></div><a href="#">Enterprise</a><div class="dd"><a href="#">Resources <i></i></a><div><b>Why Teeinblue</b><a href="#">Demo Store</a><a href="#">Compare</a><a href="#">Wall of Love</a><a href="#">For EU Sellers</a><b>Grow</b><a href="#">Blog</a><a href="#">Affiliate Program</a><a href="#">Free Tools</a><a href="#">Free Reports &amp; Ebooks</a></div></div><a href="#" class="cs">Create Shopify Store</a></nav>
+  <a class="btn" href="#">Try Teeinblue on Shopify</a>
 </header>
 
 <main class="story" id="story">
@@ -254,7 +268,7 @@
   <canvas id="scene" aria-hidden="true"></canvas>
 
   <!-- 1. hero: row of tilted round products that slides with scroll (layout of a24.raviklaassens.com) -->
-  <section class="layer live" id="hero" data-u="0,0,1.8,2.5">
+  <section class="layer live" id="hero" data-u="0,0,0.12,0.7">
     <h1 class="D abs hero-l">Designed<br>already.</h1>
     <h1 class="D abs hero-r">Now make<br>it personal.</h1>
     <div class="abs a-meta" id="aMeta">
@@ -275,24 +289,35 @@
       <div class="li">Clipart</div>
     </div>
     <div class="abs prev mv" data-dx="260" id="prev">
-      <div class="pc on"><canvas id="cText" width="1000" height="1000" role="img" aria-label="Pillow with the name you type"></canvas><div class="try"><label for="fText">Pet name</label><input id="fText" maxlength="10" value="Max" autocomplete="off"></div></div>
-      <div class="pc"><canvas id="cPhoto" width="900" height="900" role="img" aria-label="Gen AI pet portrait"></canvas><div class="try"><label>Choose a sample</label><div class="opts" id="oPhoto"></div></div></div>
-      <div class="pc"><canvas id="cStar" width="1000" height="962" role="img" aria-label="Star map poster with the names you type"></canvas><div class="try"><label for="fStar">Names</label><input id="fStar" maxlength="20" value="David &amp; Chrissa" autocomplete="off"></div></div>
-      <div class="pc"><canvas id="cClip" width="640" height="640" role="img" aria-label="Doormat with the clipart you pick"></canvas><div class="try"><label>Choose your cat</label><div class="opts" id="oClip"></div></div></div>
+      <div class="pc on"><canvas id="cText" width="1000" height="1000" role="img" aria-label="Pillow with the name you type"></canvas><div class="try"><h4>Personalize</h4><div><label for="fText">Pet name</label><input id="fText" maxlength="10" value="Max" autocomplete="off"></div><div><label>Font</label><div class="opts fonts" id="oFont"></div></div><div class="pcta">Add to cart</div></div></div>
+      <div class="pc"><canvas id="cPhoto" width="900" height="900" role="img" aria-label="Pet portrait"></canvas><div class="try"><h4>Personalize</h4><div><label>Photo</label><label class="up">Upload your photo<input type="file" accept="image/*" id="fPhoto"></label></div><div><label>Or choose a sample</label><div class="opts" id="oPhoto"></div></div><small id="nPhoto" hidden>Draft: your photo stays in your browser. The Gen AI effect isn't applied here.</small><div class="pcta">Add to cart</div></div></div>
+      <div class="pc"><canvas id="cStar" width="1000" height="962" role="img" aria-label="Star map poster with the names you type"></canvas><div class="try"><h4>Personalize</h4><div><label for="fStar">Names</label><input id="fStar" maxlength="20" value="David &amp; Chrissa" autocomplete="off"></div><div><label for="fMsg">Message</label><input id="fMsg" maxlength="22" value="The day we met" autocomplete="off"></div><div class="pcta">Add to cart</div></div></div>
+      <div class="pc"><canvas id="cClip" width="640" height="640" role="img" aria-label="Doormat with the clipart you pick"></canvas><div class="try"><h4>Personalize</h4><div><label>Choose your cat</label><div class="opts" id="oClip"></div></div><div><label for="fClip">Cat name</label><input id="fClip" maxlength="9" value="Luna" autocomplete="off"></div><div class="pcta">Add to cart</div></div></div>
     </div>
   </section>
 
   <!-- 3. steps -->
   <section class="layer" id="steps" data-u="11.4,12.2,17.6,18.4">
-    <div class="abs sframe mv" data-dy="40" id="sframe">
-      <div class="sp on"><div class="spcard"><div class="sph">Import from a print-on-demand partner</div><div class="spg"><div class="spl sel" style="--k:0"><img src="assets/fp-printful.png" alt="Printful"></div><div class="spl" style="--k:1"><img src="assets/fp-gelato.png" alt="Gelato"></div><div class="spl" style="--k:2"><img src="assets/fp-customcat.png" alt="CustomCat"></div><div class="spl" style="--k:3"><img src="assets/fp-merchone.png" alt="merchOne"></div><div class="spl" style="--k:4"><img src="assets/fp-dreamship.png" alt="Dreamship"></div><div class="spl" style="--k:5"><img src="assets/fp-shirtigo.png" alt="Shirtigo"></div><div class="spl" style="--k:6"><img src="assets/fp-shirtee.png" alt="Shirtee"></div><div class="spl" style="--k:7"><img src="assets/fp-printway.png" alt="Printway"></div><div class="spl" style="--k:8"><img src="assets/fp-marketprint.png" alt="Marketprint"></div></div><div class="spf"><span>Choose your products</span><b>Import</b></div></div></div>
-      <div class="sp sed"><img src="assets/studio-editor.png" alt="Teeinblue Design Studio: artwork, personalization options and the buyer form"></div>
-      <div class="sp"><img class="spm" src="assets/prod-mug-catlady.jpg" alt="Personalized mug, live on a store"><div class="spchip"><img src="assets/logo-shopify.png" alt="Shopify">Published to your store</div></div>
+    <h2 class="abs s-h mv" data-dy="8">Launch your first custom product in 10 minutes</h2>
+    <div class="abs s-cards mv" data-dy="26" id="sframe">
+      <div class="sp on">
+        <div class="sc a logos"><span>Import from POD partners</span><img src="assets/fp-printful.png" alt="Printful" style="--k:0"><img src="assets/fp-gelato.png" alt="Gelato" style="--k:1"><img src="assets/fp-customcat.png" alt="CustomCat" style="--k:2"><img src="assets/fp-merchone.png" alt="merchOne" style="--k:3"><img src="assets/fp-dreamship.png" alt="Dreamship" style="--k:4"></div>
+        <div class="sc b"><img src="assets/prod-mugs-pets.jpg" alt="Mugs"><em>Or add your own products</em></div>
+      </div>
+      <div class="sp">
+        <div class="sc a"><img src="assets/step-artwork.jpg" alt="Artwork in the Design Studio"><em>Create your design</em></div>
+        <div class="sc b form"><img src="assets/step-form.jpg" alt="Personalization form: photo upload and text"><em>Set up personalization</em></div>
+      </div>
+      <div class="sp">
+        <div class="sc a"><img src="assets/prod-mug-catlady.jpg" alt="Personalized mug"><em>Published to your store</em></div>
+        <div class="sc b"><img src="assets/tee-catlady-white.jpg" alt="Personalized T-shirt"><em>Start selling</em></div>
+      </div>
     </div>
-    <div class="abs sright mv" data-dy="22" id="sright">
-      <div class="st on"><span class="pill">01</span><h3>Add products</h3><p class="t16">Import products from POD partners like Printful and Gelato, or add your own.</p><i class="bar"></i></div>
-      <div class="st"><span class="pill">02</span><h3>Design</h3><p class="t16">Create your design in Teeinblue and set up personalization options: Text, Photo, Clipart and more.</p><i class="bar"></i></div>
-      <div class="st"><span class="pill">03</span><h3>Publish</h3><p class="t16">Add the design to your product and publish it to your store. Buyers personalize it with a live preview.</p><i class="bar"></i></div>
+    <div class="abs sright mv" data-dy="18" id="sright">
+      <div class="st on" tabindex="0"><span>01</span><div><h3>Add products</h3><p><q>Import products from POD partners like Printful and Gelato, or add your own.</q></p></div><i class="bar"></i></div>
+      <div class="st" tabindex="0"><span>02</span><div><h3>Design</h3><p><q>Create your design in Teeinblue and set up personalization options: Text, Photo, Clipart and more.</q></p></div><i class="bar"></i></div>
+      <div class="st" tabindex="0"><span>03</span><div><h3>Publish</h3><p><q>Add the design to your product and publish it to your store. Buyers personalize it with a live preview.</q></p></div><i class="bar"></i></div>
+      <a class="s-cta" href="#">Try Teeinblue on Shopify</a>
     </div>
   </section>
 
@@ -399,14 +424,14 @@
   <div class="col" style="left:calc(var(--u)*730)"><a href="#">Features</a><a href="#">How it works</a><a href="#">Design Studio</a><a href="#">MCP</a><a href="#">Free design library</a></div>
   <div class="col" style="left:calc(var(--u)*952)"><a href="#">About</a><a href="#">Contact</a></div>
   <img class="big" src="assets/tib-white-logo-tm.svg" alt="Teeinblue">
-  <div class="copy">© Teeinblue — prototype page, not live.</div>
+  <div class="copy">© Teeinblue — draft page, not live. Version 6 (25 Nov 2026)</div>
 </footer>
 
 <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
 <script>
 (function(){
-  var TOTAL=52,HT=1.6,HF0=1.8,HF1=2.5,OFF=HF1-2.6,SA=11.4,SOLD=7.0,SNEW=3.4,CUT=SOLD-SNEW,RT=TOTAL+OFF-CUT;   // hero: discs travel over HT screens, fade HF0..HF1 (was 4.4 / 4.8..6.0)   // tables below are in 'u' = scroll minus the hero's own scroll length
-  var SNAP=/[?&]snap=1/.test(location.search),AT=location.search.match(/[?&]at=([\d.]+)/);
+  var TOTAL=52,HF0=.12,HF1=.7,OFF=HF1-2.85,SEG=[[2.8,11.2,3],[11.4,18.4,2.8],[18.5,24.4,.1],[24.4,29.4,2.6],[29.6,36.4,3.2]],CUT=SEG.reduce(function(n,q){return n+q[1]-q[0]-q[2]},0),RT=TOTAL+OFF-CUT;   // hero: discs travel over HT screens, fade HF0..HF1 (was 4.4 / 4.8..6.0)   // tables below are in 'u' = scroll minus the hero's own scroll length
+  var SNAP=/[?&]snap=1/.test(location.search),AT=location.search.match(/[?&]at=([\d.]+)/),YY=location.search.match(/[?&]y=([\d.]+)/);
   var story=document.getElementById('story'),stage=document.getElementById('stage'),cv=document.getElementById('scene'),ctx=cv.getContext('2d');
   var W=0,H=0,DPR=1,VH=0,UU=1;
   var lenis=null;if(window.Lenis&&!SNAP){lenis=new Lenis({lerp:.1,smoothWheel:true});}
@@ -417,6 +442,7 @@
   var rnd=(function(){var s=11;return function(){s=(s*16807)%2147483647;return (s-1)/2147483646}})();
   var cards=[];for(var i=0;i<N;i++){cards.push({a:rnd(),b:rnd(),c:rnd(),d:rnd()})}
 
+  function warp(x){var c=0;for(var i=0;i<SEG.length;i++){var q=SEG[i],a=q[0]-c;if(x<=a)return x+c;if(x<=a+q[2])return q[0]+(x-a)*(q[1]-q[0])/q[2];c+=q[1]-q[0]-q[2]}return x+c}
   function resize(){
     DPR=Math.min(2,window.devicePixelRatio||1);W=stage.clientWidth;H=stage.clientHeight;VH=innerHeight;
     UU=W<=820?W/700:Math.min(W/1440,H/813);
@@ -425,7 +451,7 @@
   }
   addEventListener('resize',resize);resize();
 
-  // card layouts: positions in "premotio px" (1440x813 frame) from stage centre
+  // card layouts: positions in the 1440x813 frame from stage centre
   var SC=[[-600,-120,.45],[-470,120,-.3],[-300,290,.5],[-640,300,-.2],[-250,-40,-.5],[-40,330,.3],[130,-60,.4],[310,280,-.4],[480,-90,-.35],[640,140,.3],[560,320,.5],[240,-330,-.3]];
   var SC2=[[-560,-250,.4],[-640,60,-.3],[-480,300,.5],[-250,-330,-.4],[-300,340,.3],[300,-330,.3],[260,330,-.4],[540,-230,-.35],[640,40,.3],[520,300,-.5],[-130,-380,.2],[120,380,-.2]];
   function CWpx(){return 150*UU}
@@ -492,9 +518,17 @@
   }
   function rr(x,y,w,h,r){ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x,y,w,h,r);else ctx.rect(x,y,w,h)}
   var aT=document.getElementById('aTitle'),aO=document.getElementById('aOpt'),aS=document.getElementById('aSam'),aM=document.getElementById('aMeta'),aIdx=-1;
+  var hpos=1,htgt=1,hdir=1,hNext=0,hDrag=null,hMoved=false;      // position in the product row: time and drag, never scroll
+  function heroMove(){
+    var now=performance.now();if(!hNext)hNext=now+3200;
+    if(SNAP||hDrag)return;
+    if(hov>=0){hNext=now+2200}
+    else if(now>hNext){hNext=now+2600;if(htgt+hdir>DM-1||htgt+hdir<0)hdir=-hdir;htgt+=hdir}
+    hpos+=(htgt-hpos)*.055;
+  }
   function heroFrame(raw,tm){
     var introE=SNAP?1:Math.min(1,(performance.now()-tStart)/1500),ie=1-Math.pow(1-introE,3);
-    var f=Math.max(0,Math.min(1,raw/HT))*(DM-1);
+    heroMove();var f=hpos;
     var fade=1-Math.max(0,Math.min(1,(raw-HF0)/(HF1-HF0)));
     drawDiscs(f-(1-ie)*1.8,ie*fade,tm);
     var k=Math.round(f);if(k!==aIdx){aIdx=k;aM.style.opacity=0;setTimeout(function(){aT.textContent=DISCS[k].t;aO.textContent=DISCS[k].o;aS.textContent=DISCS[k].s;aM.style.opacity=1},SNAP?0:130);if(SNAP){aT.textContent=DISCS[k].t;aO.textContent=DISCS[k].o;aS.textContent=DISCS[k].s;aM.style.opacity=1}}
@@ -573,13 +607,18 @@
   });
   function trap(u,d){if(u<d[0]||u>d[3])return 0;if(u<d[1])return (u-d[0])/(d[1]-d[0]);if(u<=d[2])return 1;return 1-(u-d[2])/(d[3]-d[2])}
   function $(s){return [].slice.call(document.querySelectorAll(s))}
-  var liPick=-1,liScroll=-1,mcpOn=false,liveOn=false,mcpV=document.getElementById('mcpV');
-  $('.li').forEach(function(n,k){n.addEventListener('mouseenter',function(){liPick=k});n.addEventListener('click',function(){liPick=k})});
+  var fIdx=0,featOn=false,featHold=false,fNext=0,mcpOn=false,liveOn=false,mcpV=document.getElementById('mcpV');
+  $('.li').forEach(function(n,k){function go(){fIdx=k;featHold=true}n.addEventListener('mouseenter',go);n.addEventListener('click',go)});
+  document.getElementById('list').addEventListener('mouseleave',function(){featHold=document.getElementById('prev').contains(document.activeElement);fNext=performance.now()+4200});
+  document.getElementById('prev').addEventListener('pointerdown',function(){featHold=true});
+  document.getElementById('prev').addEventListener('focusin',function(){featHold=true});
+  document.getElementById('prev').addEventListener('mouseenter',function(){featHold=true});
   /* ---------- try-it forms: every preview is redrawn from what is typed or picked ---------- */
   function E(i){return document.getElementById(i)}
   function img(f,cb){var m=new Image();m.onload=function(){cb()};m.src='assets/'+f;return m}
   var CATS=[{x:10,y:108,w:156,h:172,n:'Luna'},{x:172,y:108,w:126,h:172,n:'Oliver'},{x:322,y:108,w:150,h:174,n:'Milo'},{x:494,y:108,w:116,h:174,n:'Bella'}];
   var iCats=img('doormat-4cats.jpg',drawMats),iRoom=img('doormat-room.jpg',drawMats),iPil=img('prod-pillow-max.jpg',drawText),iStar=img('starmap-poster.jpg',drawStar);
+  var FONTS=[['Script','700 78px Caveat, cursive'],['Serif','600 66px "Cormorant Garamond", serif'],['Round','700 60px Dosis, sans-serif']],fontI=0,dMsg=E('fMsg'),dClip=E('fClip');
   var dText=E('fText'),dStar=E('fStar'),nCats=3,names=['Luna','Oliver','Milo','Bella'],clip=0;
   function matDesign(list){
     var c=document.createElement('canvas');c.width=640;c.height=390;var g=c.getContext('2d');
@@ -605,23 +644,26 @@
     if(!iCats||!iRoom||!ready(iCats)||!ready(iRoom))return;
     var l=[];for(var i=0;i<nCats;i++)l.push({c:i,n:names[i]});
     var d=matDesign(l);E('cPhone').getContext('2d').drawImage(d,0,0);matPhoto(E('cRecv'),d);
-    matPhoto(E('cClip'),matDesign([{c:clip,n:CATS[clip].n}]));
+    matPhoto(E('cClip'),matDesign([{c:clip,n:dClip.value}]));
   }
   function drawText(){if(!iPil||!ready(iPil))return;var g=E('cText').getContext('2d');g.drawImage(iPil,0,0,1000,1000);
     var q=document.createElement('canvas');q.width=125;q.height=56;var h=q.getContext('2d'),lg=h.createLinearGradient(0,0,0,56);lg.addColorStop(0,'rgba(0,0,0,0)');lg.addColorStop(1,'#000');
     h.fillStyle=lg;h.fillRect(0,0,125,56);h.globalCompositeOperation='source-in';h.drawImage(iPil,455,400,125,8,0,0,125,56);
     g.drawImage(iPil,455,337,125,8,455,345,125,56);g.drawImage(q,455,345);
-    g.fillStyle='#22307c';g.textAlign='center';g.textBaseline='middle';g.save();g.translate(518,372);g.rotate(.02);g.font='700 78px Caveat, cursive';g.fillText(dText.value,0,0,260);g.restore();}
+    g.fillStyle='#22307c';g.textAlign='center';g.textBaseline='middle';g.save();g.translate(518,372);g.rotate(.02);g.font=FONTS[fontI][1];g.fillText(dText.value,0,0,260);g.restore();}
   function drawStar(){if(!iStar||!ready(iStar))return;var g=E('cStar').getContext('2d');g.drawImage(iStar,0,0,1000,962);
     g.fillStyle=starBg;g.fillRect(starBox[0],starBox[1],starBox[2],starBox[3]);
-    g.fillStyle='#1b1b1b';g.textAlign='center';g.textBaseline='middle';g.font='600 58px "Cormorant Garamond", serif';g.fillText(dStar.value.toUpperCase(),starBox[0]+starBox[2]/2,starBox[1]+starBox[3]/2+2,starBox[2]-6);}
+    g.fillStyle='#1b1b1b';g.textAlign='center';g.textBaseline='middle';g.font='600 58px "Cormorant Garamond", serif';g.fillText(dStar.value.toUpperCase(),starBox[0]+starBox[2]/2,starBox[1]+starBox[3]/2+2,starBox[2]-6);
+    g.fillStyle='#fff';g.fillRect(422,626,232,56);g.fillStyle='#1b1b1b';g.font='700 44px Caveat, cursive';g.fillText(dMsg.value,535,650,390);}
   var starBg='#fff',starBox=[328,572,414,51];
-  dText.addEventListener('input',drawText);dStar.addEventListener('input',drawStar);
+  dText.addEventListener('input',drawText);dStar.addEventListener('input',drawStar);dMsg.addEventListener('input',drawStar);dClip.addEventListener('input',drawMats);
+  FONTS.forEach(function(f,k){var b=document.createElement('button');b.type='button';b.textContent=f[0];b.className=k?'':'on';b.onclick=function(){fontI=k;$('#oFont button').forEach(function(x,i){x.classList.toggle('on',i===k)});drawText()};E('oFont').appendChild(b)});
+  E('fPhoto').addEventListener('change',function(){var f=this.files[0];if(!f)return;var m=new Image();m.onload=function(){var g=E('cPhoto').getContext('2d'),n=Math.min(m.naturalWidth,m.naturalHeight);g.drawImage(m,(m.naturalWidth-n)/2,(m.naturalHeight-n)/2,n,n,0,0,900,900);$('#oPhoto button').forEach(function(b){b.classList.remove('on')});E('nPhoto').hidden=false;URL.revokeObjectURL(m.src)};m.src=URL.createObjectURL(f)});
   var PH=['nice-golden.jpg','nice-husky.jpg','nice-pug.jpg','nice-collie.jpg','nice-dachshund.jpg'];
-  function showPhoto(k){var m=img(PH[k],function(){var g=E('cPhoto').getContext('2d');g.drawImage(m,0,0,900,900)});$('#oPhoto button').forEach(function(b,i){b.classList.toggle('on',i===k)})}
+  function showPhoto(k){E('nPhoto').hidden=true;var m=img(PH[k],function(){var g=E('cPhoto').getContext('2d');g.drawImage(m,0,0,900,900)});$('#oPhoto button').forEach(function(b,i){b.classList.toggle('on',i===k)})}
   PH.forEach(function(f,k){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Sample '+(k+1));b.style.backgroundImage='url(assets/'+f+')';b.onclick=function(){showPhoto(k)};E('oPhoto').appendChild(b)});showPhoto(0);
   CATS.forEach(function(q,k){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label',q.n);b.style.background='#d9c5a4 url(assets/doormat-4cats.jpg) no-repeat';b.style.backgroundSize='400% auto';b.style.backgroundPosition=((q.x+q.w/2-80)/480*100)+'% 62%';b.style.backgroundSize='400% auto';
-    b.className=k?'':'on';b.onclick=function(){clip=k;$('#oClip button').forEach(function(x,i){x.classList.toggle('on',i===k)});drawMats()};E('oClip').appendChild(b)});
+    b.className=k?'':'on';b.onclick=function(){clip=k;dClip.value=q.n;$('#oClip button').forEach(function(x,i){x.classList.toggle('on',i===k)});drawMats()};E('oClip').appendChild(b)});
   function setCats(n){nCats=n;$('#oCats button').forEach(function(x,i){x.classList.toggle('on',i===n-1)});$('#pnames input').forEach(function(x,i){x.hidden=i>=n;x.style.display=i<n?'':'none'});drawMats()}
   var touched=false;
   [1,2,3,4].forEach(function(n){var b=document.createElement('button');b.type='button';b.textContent=n;b.onclick=function(){touched=true;setCats(n)};E('oCats').appendChild(b);
@@ -642,6 +684,7 @@
     n.addEventListener('mouseenter',function(){stepsEl.classList.add('hold');setStep(k)});
     n.addEventListener('mouseleave',function(){stepsEl.classList.remove('hold');setStep(curSt)});
     n.addEventListener('click',function(){setStep(k)});
+    n.addEventListener('focus',function(){if(curSt!==k)setStep(k)});
     n.querySelector('.bar').addEventListener('animationend',function(){if(!stepsEl.classList.contains('hold'))setStep((k+1)%st.length)});
   });
   document.getElementById('sframe').addEventListener('mouseenter',function(){stepsEl.classList.add('hold')});
@@ -650,7 +693,7 @@
   var li=$('.li'),pcs=$('.pc'),pills=$('#pills span'),fi=$('.fi'),flowCap=document.getElementById('flowCap');
   var caps=['One artwork, many products.','Teeinblue generates the print-ready file from your buyer’s choices.','Send orders to your connected fulfillment partner.'];
   var hero=document.getElementById('hero'),chat=document.getElementById('chat'),ed=document.getElementById('ed'),mcpH=document.getElementById('mcpH'),cap1=document.getElementById('cap1'),bubs=$('#chat .bub');
-  function ph(){return W<=820?{a:[0,0,1,1,30,460,640,360],b:[0,0,1,1,30,300,640,360]}:{a:[0,0,1,1,560,320,816,459],b:[0,0,1,1,150,105,1140,641]}}
+  function ph(){return W<=820?{a:[0,0,1,1,30,480,640,360],b:[0,0,1,1,30,300,640,360]}:{a:[0,0,1,1,560,320,816,459],b:[0,0,1,1,150,105,1140,641]}}
   var P=ph();
   var tStart=performance.now(),fxEl=document.getElementById('fx');
   function cl(v){return Math.max(0,Math.min(1,v))}
@@ -675,8 +718,10 @@
       });
     });
     // list: arrow + opacity by distance, preview follows
-    var sIdx=Math.max(0,Math.min(3,Math.floor((u-3.6)/1.7)));if(sIdx!==liScroll){liScroll=sIdx;liPick=-1}
-    var idx=liPick>=0?liPick:sIdx;
+    var inF=trap(u,[2.8,3.6,10.4,11.2])>.5;if(inF!==featOn){featOn=inF;fNext=performance.now()+4200}
+    if(featOn&&!featHold&&!SNAP&&performance.now()>fNext){fIdx=(fIdx+1)%4;fNext=performance.now()+4200}
+    if(SNAP&&AT)fIdx=Math.max(0,Math.min(3,Math.floor((u-3.6)/1.7)));
+    var idx=fIdx;
     var mv=trap(u,[29.6,30.4,35.6,36.4])>.3;if(mv!==mcpOn){mcpOn=mv;if(mv){var pr=mcpV.play();if(pr)pr.catch(function(){})}else mcpV.pause()}
     liveOn=trap(u,[24.4,25.2,28.6,29.4])>.5;
     li.forEach(function(e,k){var d=Math.abs(k-idx);e.classList.toggle('on',d===0);e.style.opacity=d===0?1:(d===1?.6:(d===2?.45:.3))});
@@ -702,6 +747,11 @@
     return -1;
   }
   function heroActive(){return curRaw<HF0&&!document.getElementById('pm').classList.contains('open')}
+  heroEl.style.touchAction='pan-y';
+  heroEl.addEventListener('pointerdown',function(e){if(!heroActive()||e.target.closest('a'))return;hDrag={x:e.clientX,p:hpos};hMoved=false});
+  addEventListener('pointermove',function(e){if(!hDrag)return;var dx=e.clientX-hDrag.x;if(Math.abs(dx)>6)hMoved=true;hpos=Math.max(0,Math.min(DM-1,hDrag.p-dx/(330*UU)))});
+  function hEnd(){if(!hDrag)return;hDrag=null;if(hMoved){htgt=Math.round(hpos);hNext=performance.now()+5000}}
+  addEventListener('pointerup',hEnd);addEventListener('pointercancel',hEnd);
   heroEl.addEventListener('mousemove',function(e){
     if(!heroActive()){hov=-1;heroEl.style.cursor='';return}
     var r=stage.getBoundingClientRect();hov=hitTest(e.clientX-r.left,e.clientY-r.top);heroEl.style.cursor=hov>=0?'pointer':'';
@@ -732,7 +782,7 @@
     if(lenis)lenis.start();document.documentElement.style.overflow='';
   }
   heroEl.addEventListener('click',function(e){
-    if(!heroActive())return;var r=stage.getBoundingClientRect(),i=hitTest(e.clientX-r.left,e.clientY-r.top);if(i>=0)openPm(i);
+    if(!heroActive()||hMoved)return;var r=stage.getBoundingClientRect(),i=hitTest(e.clientX-r.left,e.clientY-r.top);if(i>=0)openPm(i);
   });
   document.getElementById('pmX').addEventListener('click',closePm);
   document.getElementById('pmBg').addEventListener('click',closePm);
@@ -744,7 +794,7 @@
     if(lenis)lenis.raf(now);
     var target=Math.max(0,Math.min(RT-1,scrollY/VH));
     sm=SNAP?target:sm+(target-sm)*.14;if(Math.abs(target-sm)<.0008)sm=target;
-    curRaw=sm;var u=sm-OFF;u=u<=SA?u:(u<=SA+SNEW?SA+(u-SA)*SOLD/SNEW:u+CUT);if(SNAP&&AT){u=+AT[1];sm=u+9}draw(u,(now-tm0)/1000,sm);update(u,sm);
+    curRaw=sm;if(SNAP&&YY)sm=+YY[1];var u=warp(sm-OFF);if(SNAP&&AT){u=+AT[1];sm=u+9}draw(u,(now-tm0)/1000,sm);update(u,sm);
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
